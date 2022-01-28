@@ -117,32 +117,21 @@ def rsvp_confirm(request, invite_id=None):
     })
 
 
-@login_required
+# @login_required
 def invitation_email_preview(request, invite_id):
     party = guess_party_by_invite_id_or_404(invite_id)
     context = get_invitation_context(party)
     return render(request, INVITATION_TEMPLATE, context=context)
 
 
-@login_required
+# @login_required
 def invitation_email_test(request, invite_id):
     party = guess_party_by_invite_id_or_404(invite_id)
     send_invitation_email(party, recipients=[settings.DEFAULT_WEDDING_TEST_EMAIL])
     return HttpResponse('sent!')
 
 
-def save_the_date_random(request):
-    template_id = random.choice(SAVE_THE_DATE_CONTEXT_MAP.keys())
-    return save_the_date_preview(request, template_id)
-
-
-def save_the_date_preview(request, template_id):
-    context = get_save_the_date_context(template_id)
-    context['email_mode'] = False
-    return render(request, SAVE_THE_DATE_TEMPLATE, context=context)
-
-
-@login_required
+# @login_required
 def test_email(request, template_id):
     context = get_save_the_date_context(template_id)
     send_save_the_date_email(context, [settings.DEFAULT_WEDDING_TEST_EMAIL])

@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.TextField()),
                 ('email', models.TextField()),
-                ('is_attending', models.NullBooleanField(default=None)),
+                ('is_attending', models.BooleanField(default=None, null=True)),
             ],
         ),
         migrations.CreateModel(
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('save_the_date_sent', models.DateTimeField(default=None, null=True)),
                 ('save_the_date_opened', models.DateTimeField(default=None, null=True)),
                 ('is_invited', models.BooleanField(default=False)),
-                ('is_attending', models.NullBooleanField(default=None)),
+                ('is_attending', models.BooleanField(default=None, null=True)),
             ],
         ),
         migrations.AddField(
