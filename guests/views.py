@@ -117,21 +117,21 @@ def rsvp_confirm(request, invite_id=None):
     })
 
 
-# @login_required
+@login_required
 def invitation_email_preview(request, invite_id):
     party = guess_party_by_invite_id_or_404(invite_id)
     context = get_invitation_context(party)
     return render(request, INVITATION_TEMPLATE, context=context)
 
 
-# @login_required
+@login_required
 def invitation_email_test(request, invite_id):
     party = guess_party_by_invite_id_or_404(invite_id)
     send_invitation_email(party, recipients=[settings.DEFAULT_WEDDING_TEST_EMAIL])
     return HttpResponse('sent!')
 
 
-# @login_required
+@login_required
 def test_email(request, template_id):
     context = get_save_the_date_context(template_id)
     send_save_the_date_email(context, [settings.DEFAULT_WEDDING_TEST_EMAIL])
@@ -141,3 +141,39 @@ def test_email(request, template_id):
 def _base64_encode(filepath):
     with open(filepath, "rb") as image_file:
         return base64.b64encode(image_file.read())
+
+
+# @login_required
+def guest_importer(request):
+    if request.method == 'GET':
+        context = {}
+        return render(request, 'guests/importer.html', context=context)
+    elif request.method == 'POST':
+        print('got it')
+        try:
+            csv_file = request.FILES["csv_file"]
+            if not csv_file.name.endswith('.csv'):
+                print('File is not CSV type')
+                return HttpResponse('SUCKS')
+            if csv_file.multiple_chunks():
+                print(r"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
+                return HttpResponse('SUCKS')
+            file_data = csv_file.read().decode("utf-8")		
+
+            lines = file_data.split("\n")
+            #loop over the lines and save them in db. If error , store as string and then display
+            for line in lines:
+                l = line.split(',')
+                party_name, first_name, last_name, party_type = l[:4]
+                if not party_name:
+                    print ('skipping row {}'.format(l))
+                    continue
+                party = Party.objects.get_or_create(name=party_name)[0]
+                party.type = party_type
+                party.save()
+                guest = Guest.objects.get_or_create(party=party, first_name=first_name, last_name=last_name)[0]
+                guest.save()
+        except Exception as e:
+            print('ERROR', e)
+        return HttpResponse("DONE")
+

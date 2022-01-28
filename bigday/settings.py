@@ -25,7 +25,7 @@ SECRET_KEY = 'u7!-y4k1c6b44q507nr_l+c^12o7ur++cpzyn!$65w^!gum@h%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['marinaanderic.com']
+ALLOWED_HOSTS = ['marinaanderic.com', 'localhost']
 
 
 # Application definition
@@ -79,17 +79,15 @@ AWS_DEPLOYED = os.environ.get('AWS_DEPLOYED', False)
 
 if AWS_DEPLOYED:
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': os.environ['DB_HOST'],
-        'PORT': '5432',
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['DB_NAME'],
+            'USER': os.environ['DB_USER'],
+            'PASSWORD': os.environ['DB_PASSWORD'],
+            'HOST': os.environ['DB_HOST'],
+            'PORT': '5432',
+        }
     }
-}
-
-
 else:
     DATABASES = {
         'default': {
@@ -165,7 +163,21 @@ WEDDING_CC_LIST = []  # put email addresses here if you want to cc someone on al
 # change to a real email backend in production
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-try:
-    from .localsettings import *
-except ImportError:
-    pass
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': '/var/log/app-logs/django.log',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }

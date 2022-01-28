@@ -16,32 +16,21 @@ def import_guests(path):
             if first_row:
                 first_row = False
                 continue
-            party_name, first_name, last_name, party_type, is_child, category, is_invited, email = row[:8]
+            party_name, first_name, last_name, party_type = row[:3]
             if not party_name:
                 print ('skipping row {}'.format(row))
                 continue
             party = Party.objects.get_or_create(name=party_name)[0]
             party.type = party_type
-            party.category = category
-            party.is_invited = _is_true(is_invited)
-            if not party.invitation_id:
-                party.invitation_id = uuid.uuid4().hex
             party.save()
-            if email:
-                guest, created = Guest.objects.get_or_create(party=party, email=email)
-                guest.first_name = first_name
-                guest.last_name = last_name
-            else:
-                guest = Guest.objects.get_or_create(party=party, first_name=first_name, last_name=last_name)[0]
-            guest.is_child = _is_true(is_child)
+            guest = Guest.objects.get_or_create(party=party, first_name=first_name, last_name=last_name)[0]
             guest.save()
 
 
 def export_guests():
     headers = [
         'party_name', 'first_name', 'last_name', 'party_type',
-        'is_child', 'category', 'is_invited', 'is_attending',
-        'rehearsal_dinner', 'meal', 'email', 'comments'
+        'category', 'is_attending', 'rehearsal_dinner', 'meal', 'comments'
     ]
     file = io.StringIO()
     writer = csv.writer(file)
@@ -54,13 +43,9 @@ def export_guests():
                     guest.first_name,
                     guest.last_name,
                     party.type,
-                    guest.is_child,
-                    party.category,
-                    party.is_invited,
                     guest.is_attending,
                     party.rehearsal_dinner,
                     guest.meal,
-                    guest.email,
                     party.comments,
                 ])
     return file
