@@ -143,13 +143,18 @@ def _base64_encode(filepath):
         return base64.b64encode(image_file.read())
 
 
-# @login_required
+@login_required
 def guest_importer(request):
+    context = {}
+    guests = list(Guest.objects.all())
+    parties = list(Party.objects.all())
     if request.method == 'GET':
-        context = {}
+        context['guests'] = guests
+        context['parties'] = parties
         return render(request, 'guests/importer.html', context=context)
-    elif request.method == 'POST':
-        print('got it')
+    if request.method == 'POST':
+        fguests = []
+        fparties = []
         try:
             csv_file = request.FILES["csv_file"]
             if not csv_file.name.endswith('.csv'):
@@ -161,19 +166,24 @@ def guest_importer(request):
             file_data = csv_file.read().decode("utf-8")		
 
             lines = file_data.split("\n")
-            #loop over the lines and save them in db. If error , store as string and then display
             for line in lines:
                 l = line.split(',')
                 party_name, first_name, last_name, party_type = l[:4]
-                if not party_name:
-                    print ('skipping row {}'.format(l))
-                    continue
+                party_t = party_type.split('\r')[0]
+                fguests.append(f'{first_name} {last_name}')
+                fparties.append(f'{party_name} {party_t}')
                 party = Party.objects.get_or_create(name=party_name)[0]
-                party.type = party_type
+                party.type = party_t
                 party.save()
                 guest = Guest.objects.get_or_create(party=party, first_name=first_name, last_name=last_name)[0]
                 guest.save()
         except Exception as e:
-            print('ERROR', e)
-        return HttpResponse("DONE")
+            context['error'] = f'top: {str(e)}'
+        try:
+            context['guests'] = fguests
+            context['parties'] = fparties
+        except Exception as e:
+            context['error'] = f'bottom: {str(e)}'
+        return render(request, 'guests/importer.html', context=context)    
+    
 

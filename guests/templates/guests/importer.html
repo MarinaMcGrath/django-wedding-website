@@ -11,4 +11,29 @@
              <button class="btn btn-primary"> <span class="glyphicon glyphicon-upload" style="margin-right:5px;"></span>Upload </button>
         </div> 
     </div>
+    {% if error %}
+        <div>ERROR:
+            {{ error }}
+        </div>
+    {% endif %}
+    <table>
+        <tr>
+            <tr>Guests</tr>
+        </tr>
+        {% for guest in guests%}
+            <tr>
+                <td>{{ guest }}</td>
+            </tr>
+        {% endfor %}            
+    </table>
+    <table>
+        <tr>
+            <tr>Parties</tr>
+        </tr>
+        {% for party in parties%}
+            <tr>
+                <td>{{ party }}</td>
+            </tr>
+        {% endfor %}            
+    </table>
 </form>
