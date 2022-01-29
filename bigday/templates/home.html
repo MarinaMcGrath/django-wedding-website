@@ -15,28 +15,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">{{ couple_name }}'s Big Day</a>
+                <a class="navbar-brand page-scroll anchor-dark" href="#page-top">{{ couple_name }}'s Big Day</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="#main-header">Home</a>
+                        <a class="page-scroll anchor-light" href="#main-header">Home</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#event">The Weekend</a>
+                        <a class="page-scroll anchor-light" href="#event">The Weekend</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#chatt">Location</a>
+                        <a class="page-scroll anchor-light" href="#chatt">Location</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#the-details">The Details</a>
+                        <a class="page-scroll anchor-light" href="#the-details">The Details</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll anchor-light" href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="rsvp">RSVP</a>
+                        <a class="page-scroll anchor-light" href="rsvp">RSVP</a>
                     </li>
                 </ul>
             </div>
@@ -69,7 +69,7 @@
                     </p>
                     <p>
                         If you're looking for information about the weekend, look no further!
-                        Please see below for all the details regarding <a href="#event" class="page-scroll">Friday night's welcome party</a> and <a href="#saturday-event" class="page-scroll">Saturday's event</a>.
+                        Please see below for all the details regarding <a href="#event" class="page-scroll anchor-dark">Friday night's welcome party</a> and <a href="#saturday-event" class="page-scroll anchor-dark">Saturday's event</a>.
                     </p>
                     <p>
                         Looking forward to seeing everyone soon!
@@ -134,10 +134,10 @@
     <section id="story" class="bg-dark">
         {% include 'partials/story.html' %}
     </section>
-    <section id="rsvp">
+    <section id="rsvp" class="bg-dark">
         {% include 'partials/rsvp.html' %}
     </section>
-    <section id="contact" class="bg-dark">
+    <section id="contact" class="bg-grey">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -147,7 +147,7 @@
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:{{ support_email }}">{{ support_email }}</a></p>
+                    <p><a href="mailto:{{ support_email }}" class="anchor-dark">{{ support_email }}</a></p>
                 </div>
             </div>
         </div>

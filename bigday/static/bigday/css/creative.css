@@ -2,6 +2,11 @@
  * Modified from Start Bootstrap - Creative Bootstrap Theme (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ rust: #844D39
+ grey: #C2BFB6
+ terracotta: #9E7152
+ sage green: #A8BAAA
+ fern green: #656D56
  */
 
 html,
@@ -17,7 +22,7 @@ body {
 
 hr {
     max-width: 50px;
-    border-color: #f05f40;
+    border-color: #844D39;
     border-width: 3px;
 }
 
@@ -25,16 +30,28 @@ hr.light {
     border-color: #fff;
 }
 
-a {
-    color: #f05f40;
+.anchor-dark {
+    color: #844D39;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
 }
 
-a:hover,
-a:focus {
-    color: #eb3812;
+.anchor-dark:hover,
+.anchor-dark:focus {
+    color: #9E7152;
+}
+
+.anchor-light {
+    color: #A8BAAA;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
+
+.anchor-light:hover,
+.anchor-light:focus {
+    color: #656D56;
 }
 
 h1,
@@ -52,9 +69,12 @@ p {
     line-height: 1.5;
 }
 
+.bg-info {
+    background-color: #C2BFB6; 
+}
 
 .bg-primary {
-    background-color: #f05f40;
+    background-color: #844D39;
 }
 
 .bg-primary a {
@@ -64,8 +84,14 @@ p {
 
 .bg-dark {
     color: #fff;
-    background-color: #222;
+    background-color: #844D39;
 }
+
+.bg-grey {
+    color: #fff;
+    background-color: #C2BFB6;
+}
+
 
 .text-faded {
     color: rgba(255,255,255,.7);
@@ -96,12 +122,12 @@ aside {
     text-transform: uppercase;
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
     font-weight: 700;
-    color: #f05f40;
+    color: #844D39;
 }
 
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
-    color: #eb3812;
+    color: #844D39;
 }
 
 .navbar-default .nav > li>a,
@@ -114,12 +140,12 @@ aside {
 
 .navbar-default .nav > li>a:hover,
 .navbar-default .nav>li>a:focus:hover {
-    color: #f05f40;
+    color: #844D39;
 }
 
 .navbar-default .nav > li.active>a,
 .navbar-default .nav>li.active>a:focus {
-    color: #f05f40!important;
+    color: #A8BAAA!important;
     background-color: transparent;
 }
 
@@ -150,7 +176,7 @@ aside {
 
     .navbar-default .nav > li>a:hover,
     .navbar-default .nav>li>a:focus:hover {
-        color: rgb(28,56,81);
+        color: #C2BFB6;
     }
 
     .navbar-default.affix {
@@ -160,22 +186,22 @@ aside {
 
     .navbar-default.affix .navbar-header .navbar-brand {
         font-size: 14px;
-        color: #f05f40;
+        color: #844D39;
     }
 
     .navbar-default.affix .navbar-header .navbar-brand:hover,
     .navbar-default.affix .navbar-header .navbar-brand:focus {
-        color: #eb3812;
+        color: #844D39;
     }
 
     .navbar-default.affix .nav > li>a,
     .navbar-default.affix .nav>li>a:focus {
-        color: rgb(28,56,81);
+        color: #C2BFB6;
     }
 
     .navbar-default.affix .nav > li>a:hover,
     .navbar-default.affix .nav>li>a:focus:hover {
-        color: #f05f40;
+        color: #844D39;
     }
 }
 
@@ -184,7 +210,7 @@ header {
     width: 100%;
     min-height: auto;
     text-align: center;
-    color: rgb(28,56,81);
+    color: #C2BFB6;
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -306,7 +332,7 @@ header .header-content .header-content-inner p {
     text-align: center;
     color: #fff;
     opacity: 0;
-    background: rgba(240,95,64,.9);
+    background: rgb(132, 77, 57, .9);
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -362,7 +388,7 @@ header .header-content .header-content-inner p {
 }
 
 .text-primary {
-    color: #f05f40;
+    color: #844D39;
 }
 
 .no-gutter > [class*=col-] {
@@ -424,9 +450,9 @@ fieldset[disabled] .btn-default.active {
 }
 
 .btn-primary {
-    border-color: #f05f40;
+    border-color: #844D39;
     color: #fff;
-    background-color: #f05f40;
+    background-color: #844D39;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -438,9 +464,9 @@ fieldset[disabled] .btn-default.active {
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-    border-color: #ed431f;
+    border-color: #844D39;
     color: #fff;
-    background-color: #ee4b28;
+    background-color: #844D39;
 }
 
 .btn-primary:active,
@@ -467,12 +493,12 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-    border-color: #f05f40;
-    background-color: #f05f40;
+    border-color: #844D39;
+    background-color: #844D39;
 }
 
 .btn-primary .badge {
-    color: #f05f40;
+    color: #844D39;
     background-color: #fff;
 }
 
@@ -516,6 +542,6 @@ body {
 }
 
 #footer {
-    background-color: #222;
+    background-color: #C2BFB6;
     padding-bottom: 30px;
 }
