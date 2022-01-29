@@ -312,6 +312,13 @@ header .header-content .header-content-inner p {
     transition: all .35s;
 }
 
+/* .img-responsive {
+    float: left;
+    width:  100px;
+    height: 100px;
+    object-fit: cover;
+} */
+
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content {
     position: absolute;
     top: 50%;
