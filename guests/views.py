@@ -55,9 +55,7 @@ def rsvp(request):
         first_name = submited_full_name.split(' ')[0]
         last_name = submited_full_name.split(' ')[1]
         guest = list(Guest.objects.filter(first_name__iexact=first_name, last_name__iexact=last_name))
-        print('GUEST', guest)
-        if len(guest):
-            print('got a party')
+        if len(guest) > 0:
             context['party'] = guest[0].party
             context['meals'] = MEALS
         return render(request, template_name='guests/invitation.html', context=context)
@@ -65,7 +63,6 @@ def rsvp(request):
 
 
 def invitation(request, invite_id):
-    print('hit invitation')
     party = guess_party_by_invite_id_or_404(invite_id)
     if party.invitation_opened is None:
         # update if this is the first time the invitation was opened
