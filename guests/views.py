@@ -51,15 +51,27 @@ def rsvp(request):
     if request.method == 'GET':
         return render(request, 'guests/rsvp.html', context)
     elif request.method == 'POST':
+        template_name='guests/rsvp.html'
         submited_full_name = request.POST['party'].lower()
-        first_name = submited_full_name.split(' ')[0]
-        last_name = submited_full_name.split(' ')[1]
-        guest = list(Guest.objects.filter(first_name__iexact=first_name, last_name__iexact=last_name))
-        if len(guest) > 0:
-            context['party'] = guest[0].party
-            context['meals'] = MEALS
-        return render(request, template_name='guests/invitation.html', context=context)
-    return HTTPResponse(404)
+        if ' ' not in submited_full_name:
+            context['error'] = True
+
+        try:
+            first_name = submited_full_name.split(' ')[0]
+            last_name = submited_full_name.split(' ')[1]
+        except Exception:
+            context['error'] = True
+
+        if 'error' not in context:
+            guest = list(Guest.objects.filter(first_name__iexact=first_name, last_name__iexact=last_name))
+            if len(guest) > 0:
+                context['party'] = guest[0].party
+                context['meals'] = MEALS
+                template_name='guests/invitation.html'
+            else:
+                context['error'] = True
+        return render(request, template_name=template_name, context=context)
+    return HTTPResponse(405)
 
 
 def invitation(request):

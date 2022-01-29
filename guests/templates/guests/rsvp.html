@@ -21,7 +21,13 @@
         <section class="col-md-6">
         <form data-toggle="validator" id="invitation-details" class="form-horizontal" method="post">
             <h2 id="rsvp-header" class="text-center">RSVP</h2>
-            <div class="clearfix"></div>
+            <div class="clearfix" style="text-align: center;">
+                {% if error %}
+                    <p>Unable to locate reservation</p>
+                    <p>Please enter your first and last name.</p>
+                    <p>Ex: Alex Trebek</p>
+                {% endif%}
+            </div>
             {% csrf_token %}
             <div class="form-group col-sm-12">
                 <input type="text" name="party" class="form-control" placeholder="Please enter your first and last name" >
