@@ -1,5 +1,6 @@
 import base64
 from collections import namedtuple
+from http.client import HTTPResponse
 import random
 from datetime import datetime
 from django.conf import settings
@@ -7,11 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Count, Q
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import ListView
 from guests import csv_import
-from guests.invitation import get_invitation_context, INVITATION_TEMPLATE, guess_party_by_invite_id_or_404, \
-    send_invitation_email
+from guests.invitation import INVITATION_TEMPLATE, guess_party_by_invite_id_or_404
 from guests.models import Guest, MEALS, Party
 from guests.save_the_date import get_save_the_date_context, send_save_the_date_email, SAVE_THE_DATE_TEMPLATE, \
     SAVE_THE_DATE_CONTEXT_MAP
@@ -31,39 +31,41 @@ def export_guests(request):
 
 @login_required
 def dashboard(request):
-    parties_with_pending_invites = Party.objects.filter(
-        is_invited=True, is_attending=None
-    ).order_by('category', 'name')
-    parties_with_unopen_invites = parties_with_pending_invites.filter(invitation_opened=None)
-    parties_with_open_unresponded_invites = parties_with_pending_invites.exclude(invitation_opened=None)
+    parties_with_pending_invites = Party.objects.filter(is_attending=None).order_by('category', 'name')
     attending_guests = Guest.objects.filter(is_attending=True)
     guests_without_meals = attending_guests.filter(
-        is_child=False
-    ).filter(
         Q(meal__isnull=True) | Q(meal='')
-    ).order_by(
-        'party__category', 'first_name'
-    )
+    ).order_by('first_name')
     meal_breakdown = attending_guests.exclude(meal=None).values('meal').annotate(count=Count('*'))
-    category_breakdown = attending_guests.values('party__category').annotate(count=Count('*'))
     return render(request, 'guests/dashboard.html', context={
         'couple_name': settings.BRIDE_AND_GROOM,
         'guests': Guest.objects.filter(is_attending=True).count(),
-        'possible_guests': Guest.objects.filter(party__is_invited=True).exclude(is_attending=False).count(),
         'not_coming_guests': Guest.objects.filter(is_attending=False).count(),
-        'pending_invites': parties_with_pending_invites.count(),
-        'pending_guests': Guest.objects.filter(party__is_invited=True, is_attending=None).count(),
         'guests_without_meals': guests_without_meals,
-        'parties_with_unopen_invites': parties_with_unopen_invites,
-        'parties_with_open_unresponded_invites': parties_with_open_unresponded_invites,
-        'unopened_invite_count': parties_with_unopen_invites.count(),
-        'total_invites': Party.objects.filter(is_invited=True).count(),
         'meal_breakdown': meal_breakdown,
-        'category_breakdown': category_breakdown,
     })
 
 
+def rsvp(request):
+    context = {}
+    if request.method == 'GET':
+        return render(request, 'guests/rsvp.html', context)
+    elif request.method == 'POST':
+        submited_full_name = request.POST['party'].lower()
+        first_name = submited_full_name.split(' ')[0]
+        last_name = submited_full_name.split(' ')[1]
+        guest = list(Guest.objects.filter(first_name__iexact=first_name, last_name__iexact=last_name))
+        print('GUEST', guest)
+        if len(guest):
+            print('got a party')
+            context['party'] = guest[0].party
+            context['meals'] = MEALS
+        return render(request, template_name='guests/invitation.html', context=context)
+    return HTTPResponse(404)
+
+
 def invitation(request, invite_id):
+    print('hit invitation')
     party = guess_party_by_invite_id_or_404(invite_id)
     if party.invitation_opened is None:
         # update if this is the first time the invitation was opened
@@ -115,20 +117,6 @@ def rsvp_confirm(request, invite_id=None):
         'party': party,
         'support_email': settings.DEFAULT_WEDDING_REPLY_EMAIL,
     })
-
-
-@login_required
-def invitation_email_preview(request, invite_id):
-    party = guess_party_by_invite_id_or_404(invite_id)
-    context = get_invitation_context(party)
-    return render(request, INVITATION_TEMPLATE, context=context)
-
-
-@login_required
-def invitation_email_test(request, invite_id):
-    party = guess_party_by_invite_id_or_404(invite_id)
-    send_invitation_email(party, recipients=[settings.DEFAULT_WEDDING_TEST_EMAIL])
-    return HttpResponse('sent!')
 
 
 @login_required
