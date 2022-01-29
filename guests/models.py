@@ -22,6 +22,7 @@ class Party(models.Model):
     A party consists of one or more guests.
     """
     name = models.TextField()
+    display_name = models.CharField(max_length=40, null=True, blank=True)
     type = models.CharField(max_length=13, choices=ALLOWED_TYPES)
     category = models.CharField(max_length=20, null=True, blank=True)
     rehearsal_dinner = models.BooleanField(default=False)

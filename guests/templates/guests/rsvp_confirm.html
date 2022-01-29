@@ -6,7 +6,7 @@
 {% block page_content %}
     <div class="layer"></div>
     <div class="container" id="main">
-        <h2>Hi {{ party.name }}! Thanks for your response!</h2>
+        <h2>Hi {{ party.display_name }} party! Thanks for your response!</h2>
         {% if party.any_guests_attending %}
             <p>
                 We can't wait to celebrate with you in Chattanooga!
@@ -22,5 +22,6 @@
         <p>
             - Marina and Eric
         </p>
+        <a href="/">Home</a>
     </div>
 {% endblock %}
