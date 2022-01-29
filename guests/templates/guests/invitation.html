@@ -4,8 +4,8 @@
     <link href="{% static 'bigday/css/invitation.css' %}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
 {% endblock %}
 {% block page_content %}
-    <div class="container" id="invitation-body">
-        <section class="col-md-12 text-center">
+    <div class="container" id="invitation-body"  style="background-color: rgba(255, 255, 255, .9);">
+        <section class="col-lg-12 text-center">
             <div id="invitation-details">
             <h2>Marina and Eric Wedding</h2>
             <p class="lead">
@@ -18,7 +18,7 @@
             </p>
             </div>
         </section>
-        <section class="col-md-12">
+        <section class="col-lg-12">
         <form data-toggle="validator" id="invitation-details" action="/invite/" class="form-horizontal" method="post">
             <h2 id="rsvp-header" class="text-center">RSVP</h2>
             <div class="clearfix"></div>
