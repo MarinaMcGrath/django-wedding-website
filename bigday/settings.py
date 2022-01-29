@@ -137,6 +137,7 @@ STATIC_ROOT = 'static_root'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join('bigday', 'static'),
+    os.path.join('guests', 'static')
 )
 
 # This is used in a few places where the names of the couple are used

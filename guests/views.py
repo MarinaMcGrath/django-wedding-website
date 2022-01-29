@@ -62,16 +62,11 @@ def rsvp(request):
     return HTTPResponse(404)
 
 
-def invitation(request, invite_id):
-    party = guess_party_by_invite_id_or_404(invite_id)
-    if party.invitation_opened is None:
-        # update if this is the first time the invitation was opened
-        party.invitation_opened = datetime.utcnow()
-        party.save()
+def invitation(request):
     if request.method == 'POST':
         for response in _parse_invite_params(request.POST):
             guest = Guest.objects.get(pk=response.guest_pk)
-            assert guest.party == party
+            party = guest.party
             guest.is_attending = response.is_attending
             guest.meal = response.meal
             guest.save()
@@ -80,11 +75,11 @@ def invitation(request, invite_id):
             party.comments = comments if not party.comments else '{}; {}'.format(party.comments, comments)
         party.is_attending = party.any_guests_attending
         party.save()
-        return HttpResponseRedirect(reverse('rsvp-confirm', args=[invite_id]))
-    return render(request, template_name='guests/invitation.html', context={
-        'party': party,
-        'meals': MEALS,
-    })
+        context = {
+            'party': party
+        }
+        return render(request, template_name='guests/rsvp_confirm.html', context=context)
+    return HttpResponse(404)
 
 
 InviteResponse = namedtuple('InviteResponse', ['guest_pk', 'is_attending', 'meal'])
