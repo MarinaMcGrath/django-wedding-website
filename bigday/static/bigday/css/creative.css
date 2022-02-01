@@ -221,6 +221,7 @@ header {
 #main-header {
     background-image: url('../images/theone.jpg');
     background-size: contain;
+    background-color: #844D39;
 }
 
 header .header-content {
@@ -338,12 +339,13 @@ header .header-content .header-content-inner p {
     transition: all .35s;
 }
 
-/* .img-responsive {
-    float: left;
-    width:  100px;
-    height: 100px;
-    object-fit: cover;
-} */
+#gutter {
+    background-image: url('../images/gutter.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 20em;
+}
+
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content {
     position: absolute;
