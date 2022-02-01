@@ -35,6 +35,7 @@ hr.light {
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
+    text-decoration: underline;
 }
 
 .anchor-dark:hover,
@@ -43,10 +44,11 @@ hr.light {
 }
 
 .anchor-light {
-    color: #A8BAAA;
+    color: #e3ece4;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
+    text-decoration: underline;
 }
 
 .anchor-light:hover,
