@@ -222,8 +222,8 @@ header {
 
 #main-header {
     background-image: url('../images/theone.jpg');
-    background-size: contain;
-    background-color: #844D39;
+    background-position-y: 110rem;
+    background-color: #658349;
 }
 
 header .header-content {
@@ -342,7 +342,7 @@ header .header-content .header-content-inner p {
 }
 
 #gutter {
-    background-image: url('../images/gutter.jpg');
+    background-image: url('../images/gutter.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
     height: 20em;
