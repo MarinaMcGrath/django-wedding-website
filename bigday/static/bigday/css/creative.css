@@ -220,12 +220,6 @@ header {
     -o-background-size: cover;
 }
 
-#main-header {
-    background-image: url('../images/theone.jpg');
-    background-position-y: 110rem;
-    background-color: #658349;
-}
-
 header .header-content {
     position: relative;
     width: 100%;
@@ -250,10 +244,6 @@ header .header-content .header-content-inner p {
     font-size: 22px;
     font-weight: 400;
     color: rgba(255,255,255);
-}
-
-#second-header {
-    background-image: url('../images/hero.jpg');
 }
 
 @media(min-width:768px) {
@@ -340,14 +330,6 @@ header .header-content .header-content-inner p {
     -moz-transition: all .35s;
     transition: all .35s;
 }
-
-#gutter {
-    background-image: url('../images/gutter.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 20em;
-}
-
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content {
     position: absolute;
