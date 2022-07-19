@@ -4,42 +4,44 @@
     <link href="{% static 'bigday/css/invitation.css' %}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
 {% endblock %}
 {% block page_content %}
-    <div class="container" id="invitation-body"  style="background-color: rgba(255, 255, 255, .8);">
-        <section class="col-md-6 col-lg-12 text-center">
-            <div id="invitation-details">
-            <h2>Marina and Eric Wedding</h2>
-            <p class="lead">
-                October 1, 2022 at 5:30 pm<br>
-                Howe Farms<br>
-                Georgetown, TN
-            </p>
-            <p>
-                <a href="/">Home</a>
-            </p>
-            </div>
-        </section>
-        <section class="col-md-6 col-lg-12 ">
-        <form data-toggle="validator" id="invitation-details" class="form-horizontal" method="post">
-            <h2 id="rsvp-header" class="text-center">RSVP</h2>
-            <div class="clearfix" style="text-align: center;">
-                {% if error %}
-                    <p>Unable to locate reservation</p>
-                    <p>Please enter your first and last name.</p>
-                    <p>Ex: Alex Trebek</p>
-                {% endif%}
-            </div>
-            {% csrf_token %}
-            <div class="form-group col-sm-12">
-                <input type="text" name="party" class="form-control" placeholder="Please enter your first and last name" >
-            </div>
-            <div class="form-group">
-                <div class="text-center">
-                    <input type="submit" class="btn btn-primary" value="Lookup Invitation" />
+    <body style="background: url('{% static 'bigday/images/uno.jpg' %}') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+        <div class="container" id="invitation-body"  style="background-color: rgba(255, 255, 255, .8);">
+            <section class="col-md-6 col-lg-12 text-center">
+                <div id="invitation-details">
+                <h2>Marina and Eric Wedding</h2>
+                <p class="lead">
+                    October 1, 2022 at 5:30 pm<br>
+                    Howe Farms<br>
+                    Georgetown, TN
+                </p>
+                <p>
+                    <a href="/">Home</a>
+                </p>
                 </div>
-            </div>
-        </form>
-        </section>
-    </div>
+            </section>
+            <section class="col-md-6 col-lg-12 ">
+            <form data-toggle="validator" id="invitation-details" class="form-horizontal" method="post">
+                <h2 id="rsvp-header" class="text-center">RSVP</h2>
+                <div class="clearfix" style="text-align: center;">
+                    {% if error %}
+                        <p>Unable to locate reservation</p>
+                        <p>Please enter your first and last name.</p>
+                        <p>Ex: Alex Trebek</p>
+                    {% endif%}
+                </div>
+                {% csrf_token %}
+                <div class="form-group col-sm-12">
+                    <input type="text" name="party" class="form-control" placeholder="Please enter your first and last name" >
+                </div>
+                <div class="form-group">
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-primary" value="Lookup Invitation" />
+                    </div>
+                </div>
+            </form>
+            </section>
+        </div>
+    </body>
 {% endblock %}
 {% block page_js %}
 {% endblock %}

@@ -8,13 +8,6 @@
 }
 
 
-body {
-    background: url('../images/uno.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
 
 #invitation-body {
     padding-bottom: 2em;
