@@ -45,12 +45,13 @@
         <!-- /.container-fluid -->
     </nav>
     {% block main %}
-    <header id="main-header" style="background: url('{% static 'bigday/images/opttwo.jpg' %}'); background-color: #1B1C14; background-size: cover;">
+    <header id="main-header" style="background-image: url('{% static 'bigday/images/opttwo.jpg' %}'); background-color: #1B1C14; background-size: cover; background-position: top; filter: blur(8px); -webkit-filter: blur(8px);">
         <div class="header-content">
             <div class="header-content-inner">
                 <h1>Marina and Eric</h1>
-                {% comment %}
                 <hr>
+                <h2>PLEASE RSVP BY SEPT 3</h2>
+                {% comment %}
                 <a href="#welcome" class="btn btn-info btn-xl page-scroll">Welcome</a>
                 <a href="#event" class="btn btn-primary btn-xl page-scroll">Friday</a>
                 <a href="#saturday-event" class="btn btn-success btn-xl page-scroll">Saturday</a>
@@ -87,7 +88,7 @@
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-12">
                     <a href="#event" class="portfolio-box page-scroll">
-                        <img src="{% static 'bigday/images/venue.jpg' %}" class="img-responsive" alt="">
+                        <img loading="lazy" src="{% static 'bigday/images/venue.jpg' %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-name">
@@ -99,7 +100,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-12">
                     <a href="#chatt" class="portfolio-box page-scroll">
-                        <img src="{% static 'bigday/images/chat.jpg' %}" class="img-responsive" alt="">
+                        <img loading="lazy" src="{% static 'bigday/images/chat.jpg' %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-name">
@@ -111,7 +112,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-12">
                     <a href="#story" class="portfolio-box page-scroll">
-                        <img src="{% static 'bigday/images/us.jpeg' %}" class="img-responsive" alt="">
+                        <img loading="lazy" src="{% static 'bigday/images/us.jpeg' %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-name">
@@ -150,7 +151,7 @@
                     <p>If you have any questions don't hesitate to reach out!</p>
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <img loading="lazy" src="{% static 'bigday/images/env.jpg' %}" class="img-responsive" alt="" style="height: 6em; margin: 0 auto;">
                     <p><a href="mailto:{{ support_email }}" class="anchor-dark">{{ support_email }}</a></p>
                 </div>
             </div>

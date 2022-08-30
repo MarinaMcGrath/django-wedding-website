@@ -43,6 +43,13 @@
             setFooterStyle();
             setFooterStyle();  // hack, for some reason this needs to be called twice on load
             window.onresize = setFooterStyle;
+
+            window.onload = () => {
+                var header = document.getElementById('main-header')
+                header.style.filter = "none"; 
+                header.style.webkitFilter = "none";
+                // header.style.backgroundImage = "url('{% static 'bigday/images/opttwo.jpg' %}')"
+            }
         });
     </script>
 {% block page_js %}
