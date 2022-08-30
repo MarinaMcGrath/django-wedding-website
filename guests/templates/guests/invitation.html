@@ -47,6 +47,10 @@
                     {% endwith %}
                 </div>
                 {% endfor %}
+                <div class="form-group col-sm-12" id="guest-name" style="display: none;">
+                    <input type="text" name="guest-first-name" class="col-sm-6" placeholder="Guest first name" >
+                    <input type="text" name="guest-last-name" class="col-sm-6" placeholder="Guest last name" >
+                </div>
                 <div class="form-group col-sm-12">
                     <input type="text" name="comments" class="form-control" placeholder="Questions/comments/well wishes" >
                 </div>
@@ -76,6 +80,12 @@
                     button.disabled = false;
                     button.required = true;
                 });
+
+                var currentName = target.closest('.form-group')[0].children[0].innerHTML
+                if (currentName.includes('Guest')){
+                    var guestName = document.getElementById("guest-name")
+                    guestName.style.display = "revert";
+                }
             } else if (value === "no") {
                 mealButtonContainer.addClass('text-muted');
                 mealButtons.each(function (index, button) {
@@ -83,6 +93,12 @@
                     button.disabled = true;
                     button.required = false;
                 });
+                
+                var currentName = target.closest('.form-group')[0].children[0].innerHTML
+                if (currentName.includes('Guest')){
+                    var guestName = document.getElementById("guest-name")
+                    guestName.style.display = "none";
+                }
             }
             // reload validation
             $(document.forms[0]).validator('destroy');
